@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello')
+
+    // Interpolated
+    const a = 'ABCD'
+    console.log(`Hello. I am ${a}`)
+    console.log('Hello. Whats yours name %s?', 'mister')
+
+    // Styled
+    console.log('%c Big Text', 'font-size:20px; background: red; color: blue')
+
+    // warning!
+    console.warn('Oh NOOO')
+
+    // Error :|
+    console.error('SHIT!')
+
+    // Info
+    console.info('FUN FACT!')
+
+    // Testing
+    console.assert(1 == 2, 'WRONG!')
+
+    // clearing
+    console.clear()
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+
+    console.log(p)
+    console.dir(p) // dropdown
+
+    // Grouping together
+    dogs.map(dog => {
+        console.group(`${dog.name}`)
+        console.log(`This is ${dog.name}`)
+        console.log(`${dog.name} is ${dog.age} years old.`)
+        console.groupEnd(`${dog.name}`)
+    })
+
+    // counting
+    console.count('Ram')
+    console.count('Ram')
+    console.count('Ram')
+    console.count('Shiv')
+    console.count('Ram')
+    console.count('Shiv')
+
+    // timing
+    console.time('fetching-data')
+    fetch('https://api.github.com/users/wesbos')
+        .then(res => res.json())
+        .then(json => {
+            console.timeEnd('fetching-data')
+            console.log(json)
+        })
+    
+
+    console.table(dogs)
+  </script>
+</body>
+</html>
