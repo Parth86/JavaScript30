@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!--<div class="item"></div>-->
   <div class="items">
     <div class="item item1">01</div>
     <div class="item item2">02</div>
@@ -35,14 +36,18 @@
   </div>
 
 <script>
-    const slider = document.querySelector('items')
+    const slider = document.querySelector('.items')
     let isDown = false; // is mouse down?
     let startX;
     let scrollLeft;
 
-    slider.addEventListener('mousedown', () => {
+    slider.addEventListener('mousedown', (e) => {
         isDown = true
         slider.classList.add('active')
+
+        startX = e.pageX - slider.offsetLeft // we want the 'px' inside the 'items' elem
+        console.log(startX)
+        scrollLeft = slider.scrollLeft // the initial scroll value when mouse is clicked down
     })
     slider.addEventListener('mouseleave', () => {
         isDown = false
@@ -50,9 +55,14 @@
     })
     slider.addEventListener('mouseup', () => {
         isDown = false
+        slider.classList.remove('active')
     })
-    slider.addEventListener('mousemove', () => {
+    slider.addEventListener('mousemove', (e) => {
         if(!isDown) return
+
+        const scrolled = (e.pageX - slider.offsetLeft) - startX // this is the amount of 'px' scrolled
+
+        slider.scrollLeft = scrollLeft - scrolled // set the final value of scroll
 
     })
 </script>
